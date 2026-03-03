@@ -1,0 +1,6 @@
+# Ignorar archivos temporales de Python y mallas cacheadas
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python

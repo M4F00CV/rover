@@ -1,0 +1,221 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <world name="lunar_arena">
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics" />
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands" />
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster" />
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre</render_engine>
+    </plugin>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="lunar_terrain_mesh">
+      <static>true</static>
+      <link name="ground_link">
+        <collision name="collision">
+          <geometry><mesh><uri>file://lunar_terrain.obj</uri></mesh></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><mesh><uri>file://lunar_terrain.obj</uri></mesh></geometry>
+          <material>
+            <ambient>0.5 0.5 0.5 1</ambient>
+            <diffuse>0.6 0.6 0.6 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="roca_roja_5cm">
+      <pose>1.0 1.0 0.5 0 0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>0.03</mass>
+          <inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry><sphere><radius>0.0106</radius></sphere></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><sphere><radius>0.0106</radius></sphere></geometry>
+          <material>
+            <ambient>0.8 0.1 0.1 1</ambient>
+            <diffuse>0.8 0.1 0.1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="roca_azul_10cm">
+      <pose>-2.0 1.5 0.5 0 0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>0.035</mass>
+          <inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry><sphere><radius>0.0133</radius></sphere></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><sphere><radius>0.0133</radius></sphere></geometry>
+          <material>
+            <ambient>0.1 0.1 0.8 1</ambient>
+            <diffuse>0.1 0.1 0.8 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="roca_verde_12cm">
+      <pose>0.5 -2.0 0.5 0 0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>0.04</mass>
+          <inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry><sphere><radius>0.0142</radius></sphere></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><sphere><radius>0.0142</radius></sphere></geometry>
+          <material>
+            <ambient>0.1 0.8 0.1 1</ambient>
+            <diffuse>0.1 0.8 0.1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="rover">
+      <pose>0 0 1 0 0 0</pose>
+
+      <link name="chassis">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <mass>15.0</mass>
+          <inertia><ixx>0.5</ixx><iyy>0.5</iyy><izz>0.5</izz></inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry><box><size>0.5 0.35 0.15</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.5 0.35 0.15</size></box></geometry>
+          <material>
+            <ambient>0.8 0.6 0.1 1</ambient> <diffuse>0.8 0.6 0.1 1</diffuse>
+            <specular>0.6 0.6 0.3 1</specular>
+          </material>
+        </visual>
+        
+        <visual name="solar_panel">
+          <pose>0 0 0.08 0 0 0</pose>
+          <geometry><box><size>0.6 0.5 0.01</size></box></geometry>
+          <material>
+            <ambient>0.1 0.1 0.3 1</ambient> <diffuse>0.1 0.1 0.3 1</diffuse>
+          </material>
+        </visual>
+
+        <sensor name="tf_luna" type="lidar">
+          <pose>0.25 0 -0.08 0 1.5708 0</pose>
+          <always_on>true</always_on>
+          <update_rate>20</update_rate>
+          <ray>
+            <scan><horizontal><samples>1</samples><resolution>1</resolution><min_angle>0</min_angle><max_angle>0</max_angle></horizontal></scan>
+            <range><min>0.05</min><max>8.0</max><resolution>0.01</resolution></range>
+          </ray>
+          <topic>/tf_luna/scan</topic>
+        </sensor>
+
+      </link>
+
+      <link name="camera_link">
+        <pose>0.2 0 0.4 0 0 0</pose>
+        <inertial><mass>0.1</mass><inertia><ixx>0.001</ixx><iyy>0.001</iyy><izz>0.001</izz></inertia></inertial>
+        <visual name="visual">
+          <geometry><box><size>0.04 0.04 0.04</size></box></geometry>
+          <material><ambient>0.1 0.1 0.1 1</ambient></material>
+        </visual>
+        <sensor name="arducam" type="camera">
+          <always_on>true</always_on>
+          <update_rate>30</update_rate>
+          <camera>
+            <horizontal_fov>1.047</horizontal_fov>
+            <image><width>640</width><height>480</height></image>
+            <clip><near>0.1</near><far>100</far></clip>
+          </camera>
+          <topic>camera/image_raw</topic>
+        </sensor>
+      </link>
+      <joint name="camera_joint" type="fixed"><parent>chassis</parent><child>camera_link</child></joint>
+
+      <link name="w_fl"><pose>0.2 0.22 -0.1 -1.5708 0 0</pose>
+        <inertial><mass>1.0</mass><inertia><ixx>0.01</ixx><iyy>0.01</iyy><izz>0.01</izz></inertia></inertial>
+        <collision name="c"><geometry><cylinder><radius>0.1</radius><length>0.08</length></cylinder></geometry></collision>
+        <visual name="v"><geometry><cylinder><radius>0.1</radius><length>0.08</length></cylinder></geometry><material><ambient>0.3 0.3 0.3 1</ambient></material></visual>
+      </link>
+      <joint name="j_fl" type="revolute"><parent>chassis</parent><child>w_fl</child><axis><xyz>0 0 1</xyz></axis></joint>
+
+      <link name="w_fr"><pose>0.2 -0.22 -0.1 -1.5708 0 0</pose>
+        <inertial><mass>1.0</mass><inertia><ixx>0.01</ixx><iyy>0.01</iyy><izz>0.01</izz></inertia></inertial>
+        <collision name="c"><geometry><cylinder><radius>0.1</radius><length>0.08</length></cylinder></geometry></collision>
+        <visual name="v"><geometry><cylinder><radius>0.1</radius><length>0.08</length></cylinder></geometry><material><ambient>0.3 0.3 0.3 1</ambient></material></visual>
+      </link>
+      <joint name="j_fr" type="revolute"><parent>chassis</parent><child>w_fr</child><axis><xyz>0 0 1</xyz></axis></joint>
+
+      <link name="w_ml"><pose>0.0 0.22 -0.1 -1.5708 0 0</pose>
+        <inertial><mass>1.0</mass><inertia><ixx>0.01</ixx><iyy>0.01</iyy><izz>0.01</izz></inertia></inertial>
+        <collision name="c"><geometry><cylinder><radius>0.1</radius><length>0.08</length></cylinder></geometry></collision>
+        <visual name="v"><geometry><cylinder><radius>0.1</radius><length>0.08</length></cylinder></geometry><material><ambient>0.3 0.3 0.3 1</ambient></material></visual>
+      </link>
+      <joint name="j_ml" type="revolute"><parent>chassis</parent><child>w_ml</child><axis><xyz>0 0 1</xyz></axis></joint>
+
+      <link name="w_mr"><pose>0.0 -0.22 -0.1 -1.5708 0 0</pose>
+        <inertial><mass>1.0</mass><inertia><ixx>0.01</ixx><iyy>0.01</iyy><izz>0.01</izz></inertia></inertial>
+        <collision name="c"><geometry><cylinder><radius>0.1</radius><length>0.08</length></cylinder></geometry></collision>
+        <visual name="v"><geometry><cylinder><radius>0.1</radius><length>0.08</length></cylinder></geometry><material><ambient>0.3 0.3 0.3 1</ambient></material></visual>
+      </link>
+      <joint name="j_mr" type="revolute"><parent>chassis</parent><child>w_mr</child><axis><xyz>0 0 1</xyz></axis></joint>
+
+      <link name="w_bl"><pose>-0.2 0.22 -0.1 -1.5708 0 0</pose>
+        <inertial><mass>1.0</mass><inertia><ixx>0.01</ixx><iyy>0.01</iyy><izz>0.01</izz></inertia></inertial>
+        <collision name="c"><geometry><cylinder><radius>0.1</radius><length>0.08</length></cylinder></geometry></collision>
+        <visual name="v"><geometry><cylinder><radius>0.1</radius><length>0.08</length></cylinder></geometry><material><ambient>0.3 0.3 0.3 1</ambient></material></visual>
+      </link>
+      <joint name="j_bl" type="revolute"><parent>chassis</parent><child>w_bl</child><axis><xyz>0 0 1</xyz></axis></joint>
+
+      <link name="w_br"><pose>-0.2 -0.22 -0.1 -1.5708 0 0</pose>
+        <inertial><mass>1.0</mass><inertia><ixx>0.01</ixx><iyy>0.01</iyy><izz>0.01</izz></inertia></inertial>
+        <collision name="c"><geometry><cylinder><radius>0.1</radius><length>0.08</length></cylinder></geometry></collision>
+        <visual name="v"><geometry><cylinder><radius>0.1</radius><length>0.08</length></cylinder></geometry><material><ambient>0.3 0.3 0.3 1</ambient></material></visual>
+      </link>
+      <joint name="j_br" type="revolute"><parent>chassis</parent><child>w_br</child><axis><xyz>0 0 1</xyz></axis></joint>
+
+      <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+        <left_joint>j_fl</left_joint>
+        <left_joint>j_ml</left_joint>
+        <left_joint>j_bl</left_joint>
+        <right_joint>j_fr</right_joint>
+        <right_joint>j_mr</right_joint>
+        <right_joint>j_br</right_joint>
+        <wheel_separation>0.44</wheel_separation>
+        <wheel_radius>0.1</wheel_radius>
+        <odom_publish_frequency>30</odom_publish_frequency>
+        <topic>/cmd_vel</topic>
+        <odom_topic>/odom</odom_topic>
+        <frame_id>odom</frame_id>
+        <child_frame_id>chassis</child_frame_id>
+      </plugin>
+    </model>
+
+  </world>
+</sdf>
