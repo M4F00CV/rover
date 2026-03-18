@@ -11,6 +11,7 @@
     <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
       <render_engine>ogre</render_engine>
     </plugin>
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu" />
 
     <light type="directional" name="sun">
       <cast_shadows>true</cast_shadows>
@@ -37,63 +38,104 @@
       </link>
     </model>
 
-    <model name="roca_roja_5cm">
+    <model name="roca_roja_1">
       <pose>1.0 1.0 0.5 0 0 0</pose>
       <link name="link">
-        <inertial>
-          <mass>0.03</mass>
-          <inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia>
-        </inertial>
-        <collision name="collision">
-          <geometry><sphere><radius>0.0106</radius></sphere></geometry>
-        </collision>
-        <visual name="visual">
-          <geometry><sphere><radius>0.0106</radius></sphere></geometry>
-          <material>
-            <ambient>0.8 0.1 0.1 1</ambient>
-            <diffuse>0.8 0.1 0.1 1</diffuse>
-          </material>
-        </visual>
+        <inertial><mass>0.03</mass><inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia></inertial>
+        <collision name="collision"><geometry><box><size>0.017 0.017 0.017</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.017 0.017 0.017</size></box></geometry><material><ambient>0.8 0.1 0.1 1</ambient><diffuse>0.8 0.1 0.1 1</diffuse></material></visual>
       </link>
     </model>
 
-    <model name="roca_azul_10cm">
+    <model name="roca_azul_1">
       <pose>-2.0 1.5 0.5 0 0 0</pose>
       <link name="link">
-        <inertial>
-          <mass>0.035</mass>
-          <inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia>
-        </inertial>
-        <collision name="collision">
-          <geometry><sphere><radius>0.0133</radius></sphere></geometry>
-        </collision>
-        <visual name="visual">
-          <geometry><sphere><radius>0.0133</radius></sphere></geometry>
-          <material>
-            <ambient>0.1 0.1 0.8 1</ambient>
-            <diffuse>0.1 0.1 0.8 1</diffuse>
-          </material>
-        </visual>
+        <inertial><mass>0.04</mass><inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia></inertial>
+        <collision name="collision"><geometry><box><size>0.0215 0.0215 0.0215</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.0215 0.0215 0.0215</size></box></geometry><material><ambient>0.1 0.1 0.8 1</ambient><diffuse>0.1 0.1 0.8 1</diffuse></material></visual>
       </link>
     </model>
 
-    <model name="roca_verde_12cm">
+    <model name="roca_verde_1">
       <pose>0.5 -2.0 0.5 0 0 0</pose>
       <link name="link">
-        <inertial>
-          <mass>0.04</mass>
-          <inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia>
-        </inertial>
-        <collision name="collision">
-          <geometry><sphere><radius>0.0142</radius></sphere></geometry>
-        </collision>
-        <visual name="visual">
-          <geometry><sphere><radius>0.0142</radius></sphere></geometry>
-          <material>
-            <ambient>0.1 0.8 0.1 1</ambient>
-            <diffuse>0.1 0.8 0.1 1</diffuse>
-          </material>
-        </visual>
+        <inertial><mass>0.05</mass><inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia></inertial>
+        <collision name="collision"><geometry><box><size>0.0228 0.0228 0.0228</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.0228 0.0228 0.0228</size></box></geometry><material><ambient>0.1 0.8 0.1 1</ambient><diffuse>0.1 0.8 0.1 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="roca_roja_2">
+      <pose>3.0 -1.5 0.5 0 0 0</pose>
+      <link name="link">
+        <inertial><mass>0.035</mass><inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia></inertial>
+        <collision name="collision"><geometry><box><size>0.019 0.019 0.019</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.019 0.019 0.019</size></box></geometry><material><ambient>0.8 0.1 0.1 1</ambient><diffuse>0.8 0.1 0.1 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="roca_azul_2">
+      <pose>-3.5 -3.0 0.5 0 0 0</pose>
+      <link name="link">
+        <inertial><mass>0.03</mass><inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia></inertial>
+        <collision name="collision"><geometry><box><size>0.017 0.017 0.017</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.017 0.017 0.017</size></box></geometry><material><ambient>0.1 0.1 0.8 1</ambient><diffuse>0.1 0.1 0.8 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="roca_verde_2">
+      <pose>2.5 3.5 0.5 0 0 0</pose>
+      <link name="link">
+        <inertial><mass>0.035</mass><inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia></inertial>
+        <collision name="collision"><geometry><box><size>0.019 0.019 0.019</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.019 0.019 0.019</size></box></geometry><material><ambient>0.1 0.8 0.1 1</ambient><diffuse>0.1 0.8 0.1 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="roca_roja_3">
+      <pose>-1.5 4.0 0.5 0 0 0</pose>
+      <link name="link">
+        <inertial><mass>0.05</mass><inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia></inertial>
+        <collision name="collision"><geometry><box><size>0.0228 0.0228 0.0228</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.0228 0.0228 0.0228</size></box></geometry><material><ambient>0.8 0.1 0.1 1</ambient><diffuse>0.8 0.1 0.1 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="roca_azul_3">
+      <pose>4.0 2.0 0.5 0 0 0</pose>
+      <link name="link">
+        <inertial><mass>0.035</mass><inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia></inertial>
+        <collision name="collision"><geometry><box><size>0.019 0.019 0.019</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.019 0.019 0.019</size></box></geometry><material><ambient>0.1 0.1 0.8 1</ambient><diffuse>0.1 0.1 0.8 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="roca_verde_3">
+      <pose>-4.0 1.0 0.5 0 0 0</pose>
+      <link name="link">
+        <inertial><mass>0.04</mass><inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia></inertial>
+        <collision name="collision"><geometry><box><size>0.0215 0.0215 0.0215</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.0215 0.0215 0.0215</size></box></geometry><material><ambient>0.1 0.8 0.1 1</ambient><diffuse>0.1 0.8 0.1 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="letrero_inicio">
+      <pose>0.0 -4.5 0.3 0 0 0</pose> <static>true</static>
+      <link name="link">
+        <collision name="c"><geometry><box><size>0.6 0.1 0.4</size></box></geometry></collision>
+        <visual name="v">
+          <geometry><box><size>0.6 0.1 0.4</size></box></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material> </visual>
+      </link>
+    </model>
+
+    <model name="letrero_fin">
+      <pose>0.0 4.5 0.3 0 0 0</pose> <static>true</static>
+      <link name="link">
+        <collision name="c"><geometry><box><size>0.6 0.1 0.4</size></box></geometry></collision>
+        <visual name="v">
+          <geometry><box><size>0.6 0.1 0.4</size></box></geometry>
+          <material><ambient>1 1 0 1</ambient><diffuse>1 1 0 1</diffuse></material> </visual>
       </link>
     </model>
 
@@ -116,6 +158,13 @@
             <specular>0.6 0.6 0.3 1</specular>
           </material>
         </visual>
+
+        <sensor name="mpu_6050" type="imu">
+          <always_on>1</always_on>
+          <update_rate>50</update_rate>
+          <visualize>true</visualize>
+          <topic>/imu</topic>
+        </sensor>
         
         <visual name="solar_panel">
           <pose>0 0 0.08 0 0 0</pose>
@@ -124,39 +173,65 @@
             <ambient>0.1 0.1 0.3 1</ambient> <diffuse>0.1 0.1 0.3 1</diffuse>
           </material>
         </visual>
+      </link>
 
-        <sensor name="tf_luna" type="lidar">
-          <pose>0.25 0 -0.08 0 1.5708 0</pose>
+      <link name="camera_link">
+        <pose>0.25 0 0.45 0 0 0</pose>
+        <inertial><mass>0.05</mass><inertia><ixx>0.001</ixx><iyy>0.001</iyy><izz>0.001</izz></inertia></inertial>
+        <visual name="visual">
+          <geometry><box><size>0.03 0.03 0.03</size></box></geometry>
+          <material><ambient>0.1 0.1 0.1 1</ambient></material>
+        </visual>
+        <sensor name="ov5647" type="camera">
+          <always_on>true</always_on>
+          <update_rate>30</update_rate>
+          <camera>
+            <horizontal_fov>0.933</horizontal_fov> 
+            <image><width>640</width><height>480</height></image>
+            <clip><near>0.1</near><far>100</far></clip>
+          </camera>
+          <topic>/camera/image_raw</topic>
+        </sensor>
+      </link>
+
+      <joint name="camera_tilt_joint" type="revolute">
+        <parent>chassis</parent>
+        <child>camera_link</child>
+        <axis>
+          <xyz>0 1 0</xyz> <limit><lower>-0.8</lower><upper>0.5</upper></limit> 
+        </axis>
+      </joint>
+
+      <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+        <joint_name>camera_tilt_joint</joint_name>
+        <p_gain>2.0</p_gain>
+        <i_gain>0.1</i_gain>
+        <d_gain>0.01</d_gain>
+        <topic>/camera_tilt/cmd_pos</topic>
+      </plugin>
+
+      <link name="lidar_head">
+        <pose>0.25 0 0.25 0 0.6108 0</pose> <inertial><mass>0.1</mass><inertia><ixx>0.001</ixx><iyy>0.001</iyy><izz>0.001</izz></inertia></inertial>
+        <visual name="visual">
+          <geometry><cylinder><radius>0.02</radius><length>0.05</length></cylinder></geometry>
+          <material><ambient>0.8 0.1 0.1 1</ambient></material>
+        </visual>
+        <sensor name="tf_luna" type="gpu_lidar"> <pose>0 0 0 0 0 0</pose> 
           <always_on>true</always_on>
           <update_rate>20</update_rate>
+          <visualize>true</visualize>
           <ray>
-            <scan><horizontal><samples>1</samples><resolution>1</resolution><min_angle>0</min_angle><max_angle>0</max_angle></horizontal></scan>
+            <scan><horizontal><samples>3</samples><resolution>1</resolution><min_angle>-0.02</min_angle><max_angle>0.02</max_angle></horizontal></scan>
             <range><min>0.05</min><max>8.0</max><resolution>0.01</resolution></range>
           </ray>
           <topic>/tf_luna/scan</topic>
         </sensor>
-
       </link>
 
-      <link name="camera_link">
-        <pose>0.2 0 0.4 0 0 0</pose>
-        <inertial><mass>0.1</mass><inertia><ixx>0.001</ixx><iyy>0.001</iyy><izz>0.001</izz></inertia></inertial>
-        <visual name="visual">
-          <geometry><box><size>0.04 0.04 0.04</size></box></geometry>
-          <material><ambient>0.1 0.1 0.1 1</ambient></material>
-        </visual>
-        <sensor name="arducam" type="camera">
-          <always_on>true</always_on>
-          <update_rate>30</update_rate>
-          <camera>
-            <horizontal_fov>1.047</horizontal_fov>
-            <image><width>640</width><height>480</height></image>
-            <clip><near>0.1</near><far>100</far></clip>
-          </camera>
-          <topic>camera/image_raw</topic>
-        </sensor>
-      </link>
-      <joint name="camera_joint" type="fixed"><parent>chassis</parent><child>camera_link</child></joint>
+      <joint name="lidar_fixed_joint" type="fixed">
+        <parent>chassis</parent>
+        <child>lidar_head</child>
+      </joint>
 
       <link name="w_fl"><pose>0.2 0.22 -0.1 -1.5708 0 0</pose>
         <inertial><mass>1.0</mass><inertia><ixx>0.01</ixx><iyy>0.01</iyy><izz>0.01</izz></inertia></inertial>
